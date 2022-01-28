@@ -38,7 +38,25 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let answer = ""
+    for (let i=0; i< expr.length; i+=10){
+        const morseLetter= String(Number(expr.slice(i,i+10)));
+        if (morseLetter === "NaN"){
+            answer += " ";
+        }else{
+            let dotsAnsDashes = ""
+            for (let j = 0; j < morseLetter.length; j+=2){
+                const frame = morseLetter.slice(j,j+2)
+                if (frame === "10"){
+                    dotsAnsDashes += "."
+                }else if (frame === "11"){
+                    dotsAnsDashes += "-"
+                }
+            }
+            answer += MORSE_TABLE[dotsAnsDashes]
+    }
+    }
+    return answer
 }
 
 module.exports = {
